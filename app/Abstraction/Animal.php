@@ -7,9 +7,9 @@ use App\Interfaces\IAnimal;
 
 abstract class Animal implements IAnimal
 {
-    protected $breed;
-    protected $age;
-    protected $gender;
+    protected $breed; //the breed of animal
+    protected $age; //age og animal
+    protected $gender; //gender of animal
     protected $color;
     public $name;
     public $square;
