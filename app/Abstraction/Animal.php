@@ -21,9 +21,9 @@ abstract class Animal implements IAnimal
     public $isSatiety = 0; //condition of satiety
     public $id_of_animal; // necessary for deleting animal and id is unique
     public static $petBoxHungry = 0; //counter for pets which are in box and hungry
-    public static $petBoxNotHungry = 0; //counter for pets which are in box
-    public static $petNotBoxHungry = 0;
-    public static $petNotBoxNotHungry = 0;
+    public static $petBoxNotHungry = 0; //counter for pets which are in box and not hungry
+    public static $petNotBoxHungry = 0; //counter for pets which are not in box and hungry
+    public static $petNotBoxNotHungry = 0;//counter for pets which are not in box and not hungry
 
     public function __construct($id_of_animal, $breed, $age, $gender, $color, $name, $square, $satiety, $max_satiety)
     {

@@ -110,8 +110,5 @@ class Application
         }
         $output['needCleaning']=$box->clearCrap();
         return $output;
-
-        $box->showAnimals();
-        $box->takeAnimals(14);
     }
 }

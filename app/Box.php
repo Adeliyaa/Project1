@@ -4,18 +4,18 @@ namespace App;
 
 class Box
 {
-    public $color;
-    const SQUARE = 1200;
-    public $current_space = 0;
-    const LIMIT_OF_CRAP = 200;
+    public $color; //color of box
+    const SQUARE = 1200; //square of box is 1200
+    public $current_space = 0; //initial space when we have add pets in box yet
+    const LIMIT_OF_CRAP = 200; //limit of excrement, if excrement is more than, this it needed to be cleaned
     public $petInBox = []; // pets which are in box
     public $petNotInBox= []; // pets which are not in box
-    public $catInBox = [];
-    public $dogInBox = [];
-    public $catNotInBox =[];
-    public $dogNotInBox = [];
-    public $all_craps= [];
-    public $sum_of_craps;
+    public $catInBox = []; //cats that are in box
+    public $dogInBox = []; //dogs that are in box
+    public $catNotInBox =[]; //cats that are not in box
+    public $dogNotInBox = []; //dogs that are not in box
+    public $all_craps= []; //save object of craps of pets that are in box and have crap
+    public $sum_of_craps; //sum of excrement
 
     public function addAnimals($pets = [])
     {
