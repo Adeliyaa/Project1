@@ -10,19 +10,18 @@ abstract class Animal implements IAnimal
     protected $breed; //the breed of animal
     protected $age; //age og animal
     protected $gender; //gender of animal
-    protected $color;
-    public $name;
-    public $square;
-    public $satiety;
-    public $max_satiety;
-    public $isPetInBox = 0;
-    public $needFood;
-    public static $current_feed = 0; //static due to current feed must change for all object
-    public $isSatiety = 0;
-    public $excrement= [];
-    public $id_of_animal;
-    public static $petBoxHungry = 0;
-    public static $petBoxNotHungry = 0;
+    protected $color; //color of animal
+    public $name;//name of animal
+    public $square; //square of animal
+    public $satiety; //current satiety
+    public $max_satiety;//when animal get food, it reaches max satiety
+    public $isPetInBox = 0; //determine is pet or animal in box
+    public $needFood; //is difference between max satiety and satiety
+    public static $current_feed = 0; //static due to current feed must change for all object to compare amount of feed which is constant
+    public $isSatiety = 0; //condition of satiety
+    public $id_of_animal; // necessary for deleting animal and id is unique
+    public static $petBoxHungry = 0; //counter for pets which are in box and hungry
+    public static $petBoxNotHungry = 0; //counter for pets which are in box
     public static $petNotBoxHungry = 0;
     public static $petNotBoxNotHungry = 0;
 
