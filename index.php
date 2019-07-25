@@ -2,4 +2,9 @@
 require 'vendor/autoload.php';
 
 $start = new \App\Application();
-$start->start();
+//$cli=new \App\CliView();
+//$cli->CliView($start->start());
+$html=new \App\HtmlView();
+$html->HtmlView($start->start());
+
+

@@ -21,6 +21,10 @@ abstract class Animal implements IAnimal
     public $isSatiety = 0;
     public $excrement= [];
     public $id_of_animal;
+    public static $petBoxHungry = 0;
+    public static $petBoxNotHungry = 0;
+    public static $petNotBoxHungry = 0;
+    public static $petNotBoxNotHungry = 0;
 
     public function __construct($id_of_animal, $breed, $age, $gender, $color, $name, $square, $satiety, $max_satiety)
     {
@@ -37,9 +41,6 @@ abstract class Animal implements IAnimal
 
     abstract public function voice(): void;
 
-    /**
-     * @return bool
-     */
     abstract public function crawl(): bool;
 
     abstract public function getExcrementsMass(): float;
@@ -52,10 +53,28 @@ abstract class Animal implements IAnimal
     {
             if ($this->needFood + self::$current_feed <= $amount_of_feed) { //sum of squares of each pets must be less or equal to SQUARE of box
                 $this->isSatiety = 1;
-                echo $this->name." ".$this->needFood." ";
+                if ($this->isPetInBox == 0)
+                {
+                    $this::$petBoxNotHungry++;
+                } else {
+                    $this::$petBoxNotHungry++;
+                }
+                self::$current_feed = $this->needFood + self::$current_feed; //change the current feed of box when we add each pet
+            } else {
+                if ($this->isPetInBox == 0)
+                {
+                    $this::$petNotBoxHungry++;
+                } else {
+                    $this::$petBoxHungry++;
+                }
             }
-            self::$current_feed = $this->needFood + self::$current_feed; //change the current feed of box when we add each pet
+            //self::$current_feed = $this->needFood + self::$current_feed; //change the current feed of box when we add each pet
     }
+
+    /**
+     * Toilet checks is pet in satiety
+     * if yes , then it will make excrement(crap)
+    */
 
     public function toilet()
     {

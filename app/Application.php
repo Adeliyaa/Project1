@@ -4,8 +4,11 @@ namespace App;
 
 class Application
 {
+
     public function start()
     {
+
+        $output = [];
         require 'vendor/autoload.php';
         $box = new \App\Box();
         $pets = [
@@ -50,19 +53,23 @@ class Application
 //var_dump($pets);
 
         $box->addAnimals($pets);
+//        echo count($box->petInBox);
+//        echo count($box->petNotInBox);
+//        echo count($box->dogInBox);
+//        echo count($box->dogNotInBox);
 
-        echo "<br/>";
+        $output['#petsInBox']=count($box->petInBox);
+        $output['#petsNotInBox'] = count($box->petNotInBox);
+        $output['#dogInBox']=count($box->dogInBox);
+        $output['#dogNotInBox']=count($box->dogNotInBox);
+        $output['#catInBox']=count($box->catInBox);
+        $output['#catNotInBox']=count($box->catNotInBox);
+
         /**
          * Calculate how much food needs for pets
          */
         foreach ($pets as $pet) {
             $pet->needFood = $pet->max_satiety - $pet->satiety;
-            //echo "<br/>";
-            echo $pet->name." needs ".$pet->needFood." gr of food"."<br/>";
-
-//    array_push($needFoodarr, ['' => , 'need_food' => $pet->needFood]);
-//
-//    asort($needFoodarr);
         }
 
         /**
@@ -71,57 +78,27 @@ class Application
         usort($pets, function ($first_pet, $second_pet) {
             return $first_pet->needFood > $second_pet->needFood;
         });
-
-        foreach ($pets as $pet) {
-            echo  $pet->needFood. " ";
-        }
-        echo  "<br/>";
-        echo "Pets that got a feed: <br/>";
+        /**
+         * Pets that get a feed:
+        */
         foreach ($pets as $pet) {
             //echo $pet->needFood. " ";
             $pet->eat(\App\Feed::AMOUNT_OF_FEED);
         }
 
-        echo "<br/>";
-        echo "Pets that don't get a feed:"."<br/>";
-        echo " <br/>";
-        foreach ($pets as $pet) {
-            if ($pet->isSatiety == 0) {
-                echo $pet->name." ";
-            }
-        }
+//        echo Animal::$petBoxHungry;
+//        echo Animal::$petBoxNotHungry;
+        $output['petBoxNotHungry']=Dog::$petBoxNotHungry;
+        $output['petNotBoxHungry']= Dog::$petNotBoxHungry;
+        $output['petBoxHungry']= Dog::$petBoxHungry;
+        $output['petNotBoxNotHungry']= Dog::$petNotBoxNotHungry;
+        //return $output;
 
+        $box->showAnimals();
+        $box->takeAnimals(14);
         /**
-         * Determine which pet is in box or is not and get food or not
-         */
-        echo "<br/>";
-        foreach ($pets as $pet) {
-            if ($pet->isSatiety == 0) {
-                if ($pet->isPetInBox == 0) {
-                    echo $pet->name." don't get a food and isn't in box";
-                    echo "<br/>";
-                }
-                if ($pet->isPetInBox == 1) {
-                    echo $pet->name." don't get a food and is in box";
-                    echo "<br/>";
-                }
-            }
-            if ($pet->isSatiety == 1) {
-                if ($pet->isPetInBox == 0) {
-                    echo $pet->name." get a food and isn't in box";
-                    echo "<br/>";
-                }
-                if ($pet->isPetInBox == 1) {
-                    echo $pet->name." get a food and is in box";
-                    echo "<br/>";
-                }
-            }
-        }
-
-        /**
-         * Determine is pet go to the toilet,
-         * if yes, it means that pet will give excrement,
-         * and this excrement put to the array of excrements(all_craps)
+         * crap(excrement) can or can not be, since if pet is not in satiety, it will not give excrement
+         * all_craps saves excrement's as object of class Crap of each pets that are in box
          */
         foreach ($pets as $pet) {
             $crap = $pet->toilet();
@@ -130,14 +107,11 @@ class Application
                     array_push($box->all_craps);
                 }
             }
-            if ($crap) {
-                echo $pet->name."'s amount of excrement is ".$crap->amount_of_crap . " ". "<br/>";
-            }
         }
-        $box->clearCrap();
-        echo "<br/>";
+        $output['needCleaning']=$box->clearCrap();
+        return $output;
+
         $box->showAnimals();
-        echo "<br/>";
         $box->takeAnimals(14);
     }
 }

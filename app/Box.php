@@ -8,8 +8,12 @@ class Box
     const SQUARE = 1200;
     public $current_space = 0;
     const LIMIT_OF_CRAP = 200;
-    public $petInBox = [];
-    public $petNotInBox= [];
+    public $petInBox = []; // pets which are in box
+    public $petNotInBox= []; // pets which are not in box
+    public $catInBox = [];
+    public $dogInBox = [];
+    public $catNotInBox =[];
+    public $dogNotInBox = [];
     public $all_craps= [];
     public $sum_of_craps;
 
@@ -37,19 +41,6 @@ class Box
         }
 
         /**
-         * Pets which are in box
-         */
-
-        echo "Pets which are in box:";
-        foreach ($this->petInBox as $my_pet) {
-            //var_dump($my_pet); //any object field
-            echo $my_pet->square." ".$my_pet->name;
-            echo "<br>";
-        }
-        echo "# of pets which are in box:".sizeof($this->petInBox);
-        echo "<br>";
-
-        /**
          * Pets which are not in box
          * their isPetInBox mode is 0
          */
@@ -59,13 +50,24 @@ class Box
             }
         }
 
-        echo "Pets which are not in box: ";
-        foreach ($this->petNotInBox as $my_pet) {
-            //var_dump($my_pet)." "; //any object field
-            echo $my_pet->square." ".$my_pet->name;
-            echo "<br>";
+        foreach ($pets as $my_object) {
+            if ($my_object instanceof Cat) {
+                if ($my_object->isPetInBox == 0) {
+                    array_push($this->catInBox, $my_object);
+                }
+                elseif ($my_object->isPetInBox == 1) {
+                    array_push($this->catNotInBox, $my_object);
+                }
+            }
+            if ($my_object instanceof Dog) {
+                if ($my_object->isPetInBox == 0) {
+                    array_push($this->dogInBox, $my_object);
+                }
+                elseif ($my_object->isPetInBox == 1) {
+                    array_push($this->dogNotInBox, $my_object);
+                }
+            }
         }
-        echo "# of pets which are not in box :".sizeof($this->petNotInBox);
     }
 
     /**
@@ -103,11 +105,11 @@ class Box
      */
     public function clearCrap()
     {
-        $sum_of_craps = array_sum($this->all_craps); //all_craps is array which save all excrement of pets which got a food
+        $sum_of_craps = array_sum($this->all_craps); //all_craps is array which save all excrement of pets which get a food and are in box
         if ($sum_of_craps > self::LIMIT_OF_CRAP) {
-            echo "Box is needed to be cleared!";
+            return 1;
         } else {
-            echo "Box can be left without clearing! ";
+            return 0;
         }
     }
 }
