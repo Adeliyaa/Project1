@@ -3,10 +3,12 @@
 
 namespace App;
 
-class HtmlView
+use App\Interfaces\IView;
+
+class HtmlView implements IView
 {
 
-    public function HtmlView($output)
+    public function view(array $output)
     {
         echo "Number of pets that in Box: ".$output['#petsInBox']."<br/>";
         echo "Number of pets that are not in box: ".$output['#petsNotInBox']."<br/>";

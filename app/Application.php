@@ -2,10 +2,12 @@
 
 namespace App;
 
+use App\Interfaces\IView;
+
 class Application
 {
 
-    public function start()
+    public function start(IView $view)
     {
 
         $output = [];
@@ -53,10 +55,6 @@ class Application
 //var_dump($pets);
 
         $box->addAnimals($pets);
-//        echo count($box->petInBox);
-//        echo count($box->petNotInBox);
-//        echo count($box->dogInBox);
-//        echo count($box->dogNotInBox);
 
         $output['#petsInBox']=count($box->petInBox);
         $output['#petsNotInBox'] = count($box->petNotInBox);
@@ -86,13 +84,10 @@ class Application
             $pet->eat(\App\Feed::AMOUNT_OF_FEED);
         }
 
-//        echo Animal::$petBoxHungry;
-//        echo Animal::$petBoxNotHungry;
         $output['petBoxNotHungry']=Dog::$petBoxNotHungry;
         $output['petNotBoxHungry']= Dog::$petNotBoxHungry;
         $output['petBoxHungry']= Dog::$petBoxHungry;
         $output['petNotBoxNotHungry']= Dog::$petNotBoxNotHungry;
-        //return $output;
 
         $box->showAnimals();
         $box->takeAnimals(14);
@@ -109,6 +104,6 @@ class Application
             }
         }
         $output['needCleaning']=$box->clearCrap();
-        return $output;
+        $view->view($output); //give the output array to view which can be Cli or Html
     }
 }

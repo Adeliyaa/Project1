@@ -3,10 +3,12 @@
 
 namespace App;
 
-class CliView
+use App\Interfaces\IView;
+
+class CliView implements IView
 {
 
-    public function CliView(array $output)
+    public function view(array $output)
     {
         echo "Number of pets that in Box: ".$output['#petsInBox']."\n";
         echo "Number of pets that are not in box: ".$output['#petsNotInBox']."\n";

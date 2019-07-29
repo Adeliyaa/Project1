@@ -79,11 +79,11 @@ class Box
             if ($petInBox->id_of_animal == $id_of_animal) {
 //                array_filter($petInBox, function($petInBox) use ($id_of_animal) { return $petInBox->id_of_animall === $id_of_animal; });
                 unset($this->petInBox, $key);
-                echo "The pet with id ".$petInBox->id_of_animal. "is taken out of box!";
+                //echo "The pet with id ".$petInBox->id_of_animal. "is taken out of box!";
                 return;
             }
         }
-        echo "This animal is already out of box!";
+        //echo "This animal is already out of box!";
     }
 
     /**
@@ -91,12 +91,10 @@ class Box
      */
     public function showAnimals()
     {
-        echo "Pets which are in box:";
-        echo "<br>";
         foreach ($this->petInBox as $my_pet) {
             //var_dump($my_pet); //any object field
-            echo $my_pet->name. " with id ". $my_pet->id_of_animal;
-            echo "<br/>";
+//            echo $my_pet->name. " with id ". $my_pet->id_of_animal;
+//            echo "<br/>";
         }
     }
 
