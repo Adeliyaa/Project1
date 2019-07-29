@@ -13,8 +13,9 @@ class QuantityCli extends Quantity
     {
         //in longopts saves all keys which we give the value in terminal
         $longopts  = array(
-            "puppy_count::",    // :: mean Необязательное значение, if just : means required , if do not write anything , it is error
-            "kitty_count::",
+            "puppy_count::",    //key for giving the quantity of puppy
+            // :: mean Необязательное значение, if just : means required , if do not write anything , it is error
+            "kitty_count::",    //key for giving the quantity of kitty
         );
         $options = getopt("", $longopts); // the first parameter for one symbol keys, we need keys which are more than one symbol, so we do "", and write in longopts
         return $options;
