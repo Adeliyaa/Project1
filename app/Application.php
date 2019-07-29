@@ -2,12 +2,13 @@
 
 namespace App;
 
+use App\Abstraction\Quantity;
 use App\Interfaces\IView;
 
 class Application
 {
 
-    public function start(IView $view)
+    public function start(IView $view, Quantity $quantity)
     {
 
         $output = [];
@@ -54,15 +55,20 @@ class Application
 
 //var_dump($pets);
 
-        $box->addAnimals($pets);
+        $box->addAnimals($pets, $quantity->numberOfPets());
 
         $output['#petsInBox']=count($box->petInBox);
         $output['#petsNotInBox'] = count($box->petNotInBox);
-        $output['#dogInBox']=count($box->dogInBox);
-        $output['#dogNotInBox']=count($box->dogNotInBox);
-        $output['#catInBox']=count($box->catInBox);
-        $output['#catNotInBox']=count($box->catNotInBox);
-
+        $output['#dogInBox']=$box->dogInBox;
+        $output['#dogNotInBox']=$box->dogNotInBox;
+        $output['#catInBox']=$box->catInBox;
+        $output['#catNotInBox']=$box->catNotInBox;
+        $output['puppy_count'] = $quantity->numberOfPets()['puppy_count'];
+        $output['kitty_count'] = $quantity->numberOfPets()['kitty_count'];
+        $output['catNotAddedBox'] = $box->catNotAddedBox;
+        $output['dogNotAddedBox'] = $box->dogNotAddedBox;
+        $output['catCanAddedBox'] = $box->catCanAddedBox;
+        $output['dogCanAddedBox'] = $box->dogCanAddedBox;
         /**
          * Calculate how much food needs for pets
          */

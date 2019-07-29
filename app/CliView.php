@@ -25,6 +25,18 @@ class CliView implements IView
         } else {
             echo "The box is not needed cleaning!"."\n";
         }
+        echo "You ask to add: ".$output['puppy_count']." dog(s) and ".$output['kitty_count']." cat(s)!"."\n";
+        echo "Successfully added: ".$output['#dogInBox']." dog(s) and ".$output['#catInBox']." cat(s)!"."\n";
+        if ($output['catNotAddedBox']>0 || $output['dogNotAddedBox']>0) {
+            echo $output['catNotAddedBox']." cat(s) and ".$output['dogNotAddedBox']." dog(s) that are(is) not added!"."\n";
+        } else {
+            echo "All pets are added to box!"."\n";
+        }
+        if ($output['catCanAddedBox'] > 0 || $output['dogCanAddedBox']>0) {
+            echo $output['catCanAddedBox']." cat(s) and ".$output['dogCanAddedBox']." dog(s) can be added to box"."\n";
+        } else {
+            echo "No more pets can be added!";
+        }
 
     }
 }
