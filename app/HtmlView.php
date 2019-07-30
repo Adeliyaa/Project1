@@ -27,7 +27,16 @@ class HtmlView implements IView
         }
         echo "You ask to add: ".$output['puppy_count']." dog(s) and ".$output['kitty_count']." cat(s)!"."<br/>";
         echo "Successfully added: ".$output['#dogInBox']." dog(s) and ".$output['#catInBox']." cat(s)!"."<br/>";
-        echo $output['catNotAddedBox']." cat(s) and ".$output['dogNotAddedBox']." dog(s) that are(is) not added!"."<br/>";
-        echo $output['catCanAddedBox']." cat(s) and ".$output['dogCanAddedBox']." dog(s) can be added to box"."<br/>";
+        if ($output['catNotAddedBox']>0 || $output['dogNotAddedBox']>0) {
+            echo $output['catNotAddedBox']." cat(s) and ".$output['dogNotAddedBox']." dog(s) that are(is) not added!"."<br/>";
+        } else {
+            echo "All pets are added to box!"."<br/>";
+        }
+        if ($output['catCanAddedBox'] > 0 || $output['dogCanAddedBox']>0) {
+            echo $output['catCanAddedBox']." cat(s) and ".$output['dogCanAddedBox']." dog(s) can be added to box"."<br/>";
+        } else {
+            echo "No more pets can be added!";
+        }
+
     }
 }
