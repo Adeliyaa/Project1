@@ -3,6 +3,7 @@ namespace App;
 
 
 use App\Abstraction\Animal;
+use App\Abstraction\ParameterParser;
 
 class Dog extends Animal
 {
@@ -18,7 +19,7 @@ class Dog extends Animal
         return true;
     }
 
-    public function getExcrementsMass(): float
+    public function getExcrementMass(): float
     {
         return self::EXCREMENTS_MASS_PERCENTAGE;
     }
