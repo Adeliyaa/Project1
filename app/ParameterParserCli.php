@@ -24,16 +24,15 @@ class ParameterParserCli implements IParameterParser
         $longopts = array ("puppy_count::", "kitty_count::", "box_square::",);
         $parameters = getopt("",$longopts);
 
-        if (isset ($parameters['puppy_count'])) {
-            $this->amountOfDog = $parameters['puppy_count'];
-        }
+        $this->amountOfDog = $this->checkExistence($parameters['puppy_count']);
+        $this->amountOfCat = $this->checkExistence($parameters['kitty_count']);
+        $this->squareOfBox = $this->checkExistence($parameters['box_square']);
+    }
 
-        if(isset($parameters['kitty_count'])) {
-            $this->amountOfCat = $parameters['kitty_count'];
-        }
-
-        if(isset($parameters['box_square'])) {
-            $this->squareOfBox = $parameters['box_square'];
+    public function checkExistence($parameter)
+    {
+        if (isset($parameter)) {
+            return $parameter;
         }
     }
 

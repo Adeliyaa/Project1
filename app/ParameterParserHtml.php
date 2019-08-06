@@ -21,16 +21,20 @@ class ParameterParserHtml implements IParameterParser
      */
     public function __construct()
     {
-        if (isset ($_GET['puppy_count'])) {
-            $this->amountOfDog = $_GET['puppy_count'];
-        }
+        $this->amountOfDog = $this->checkExistence($_GET['puppy_count']);
+        $this->amountOfCat = $this->checkExistence($_GET['kitty_count']);
+        $this->squareOfBox = $this->checkExistence($_GET['box_square']);
+    }
 
-        if(isset($_GET['kitty_count'])) {
-            $this->amountOfCat = $_GET['kitty_count'];
-        }
-
-        if(isset($_GET['box_square'])) {
-            $this->squareOfBox = $_GET['box_square'];
+    /**
+     * Check existence of parameter
+     * @param $parameter
+     * @return mixed
+     */
+    public function checkExistence($parameter)
+    {
+        if (isset($parameter)) {
+            return $parameter;
         }
     }
 
