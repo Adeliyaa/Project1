@@ -4,8 +4,8 @@ use App\ParameterParserHtml;
 
 require 'vendor/autoload.php';
 
-$htmlView=new \App\HtmlView(); //instance of Html View
-$start = new \App\Application(); //instance of Application
+$htmlView = new \App\HtmlView();
+$start = new \App\Application();
 $params = new ParameterParserHtml();
 $start->start($htmlView,$params);
 

@@ -1,12 +1,13 @@
 <?php
 
-
 namespace App\Interfaces;
-
-
-use App\Abstraction\ParameterParser;
 
 interface IFactory
 {
+    /**
+     * methods for creating instances (pets and box)
+     * @param int $StuffAmount
+     * @return mixed
+     */
     static public function create(int $StuffAmount);
 }

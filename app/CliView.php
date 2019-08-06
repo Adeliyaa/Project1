@@ -1,13 +1,17 @@
 <?php
 
-
 namespace App;
 
 use App\Interfaces\IView;
 
 class CliView implements IView
 {
-
+    /**
+     * represent outputs by cli
+     * @param BoxPresenter $boxPresenter
+     * @param RoomPresenter $roomPresenter
+     * @return mixed|void
+     */
     public function view(BoxPresenter $boxPresenter, RoomPresenter $roomPresenter)
     {
         echo $boxPresenter->getPetsInBox()."\n"; // в коробке 20 шенков
@@ -18,6 +22,5 @@ class CliView implements IView
         echo $roomPresenter->getDogsInRoom()."\n";
         echo $boxPresenter->isNeedClear()."\n";
         echo $roomPresenter->isNeedClear()."\n";
-
     }
 }

@@ -1,18 +1,27 @@
 <?php
-namespace App;
 
+namespace App;
 
 class Crap
 {
-    public $amount_of_crap;
+    private $amount_of_crap;
 
+    /**
+     * Crap constructor.
+     * @param Food $food
+     */
     public function __construct($food)
     {
-        $this->amount_of_crap = $food->amount_of_feed;
+        $this->amount_of_crap = $food->getFoodAmount();
     }
 
+    /**
+     * get amount of crap
+     * @return mixed
+     */
     public function getExcrement()
     {
         return $this->amount_of_crap;
     }
 }
+

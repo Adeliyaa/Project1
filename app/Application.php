@@ -10,8 +10,8 @@ require 'vendor/autoload.php';
 
 class Application
 {
-
     /**
+     * Implement action(logic)
      * @param IView $view
      * @param IParameterParser $params
      */
@@ -25,25 +25,20 @@ class Application
         $pets = array_merge($dogs, $cats);
         shuffle($pets);
 
-        $foodPortion = FoodFactory::create(count($pets));
-
         $room = new Room();
 
         $insert = new Insert();
+        $feed = new AnimalFeeder;
 
-        foreach ($pets as $pet) {
-            /**
-             * @var Animal $pet
-             */
-            $pet->eat(array_pop($foodPortion));
-        }
         /** @var Animal $pets */
+        $feed->feedPets($pets);
+
         $insert->dispensePet($pets,$box,$room);
 
         $box->petsDoToilet();
         $room->petsDoToilet();
 
-        $view->view(new BoxPresenter($box),new RoomPresenter($room)); //give the output array to view which can be Cli or Html
+        $view->view(new BoxPresenter($box),new RoomPresenter($room));
 
         if ($box->isNeedClear()) {
             $box->clearCrap();
@@ -52,6 +47,6 @@ class Application
         if ($room->isNeedClear()) {
             $room->clearCrap();
         }
-
     }
 }
+

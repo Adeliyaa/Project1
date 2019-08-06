@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Interfaces;
-
 
 interface IParameterParser
 {
@@ -13,17 +11,20 @@ interface IParameterParser
     public function __construct();
 
     /**
-     * @return int amount of dog
+     * get amount of dog
+     * @return int
      */
     public function getDogAmount():int ;
 
     /**
-     * @return int amount of cat
+     * get amount of cat
+     * @return int
      */
     public function getCatAmount():int ;
 
     /**
-     * @return int square of box
+     * get square of box
+     * @return int
      */
     public function getBoxSquare():int ;
 }

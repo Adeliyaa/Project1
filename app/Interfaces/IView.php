@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Interfaces;
-
 
 use App\BoxPresenter;
 use App\RoomPresenter;
@@ -10,8 +8,10 @@ use App\RoomPresenter;
 interface IView
 {
     /**
-     * the function view represent output to Clii or Html
-    */
+     * represent outputs
+     * @param BoxPresenter $boxPresenter
+     * @param RoomPresenter $outBoxPresenter
+     * @return mixed
+     */
     public function view(BoxPresenter $boxPresenter, RoomPresenter $outBoxPresenter);
-
 }

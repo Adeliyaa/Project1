@@ -1,8 +1,7 @@
 <?php
+
 namespace App\Abstraction;
 
-
-use App\Box;
 use App\Crap;
 use App\Food;
 use App\Interfaces\IAnimal;
@@ -14,16 +13,22 @@ abstract class Animal implements IAnimal
     protected $age; //age og animal
     protected $gender; //gender of animal
     protected $color; //color of animal
-    public $name;//name of animal
-    public $square; //square of animal
-    public $max_satiety;//when animal get food, it reaches max satiety
+    protected $name;//name of animal
+    protected $square; //square of animal
     public static $current_feed = 0; //static due to current feed must change for all object to compare amount of feed which is constant
-    public $isSatiety = 0; //condition of satiety
     public $isPetInBox = 0; //determine is pet or animal in box
-    public $stomach=[];
+    public $stomach = [];
 
-
-    public function __construct($breed, $age, $gender, $color, $name, $square, $max_satiety)
+    /**
+     * Animal constructor.
+     * @param $breed
+     * @param $age
+     * @param $gender
+     * @param $color
+     * @param $name
+     * @param $square
+     */
+    public function __construct($breed, $age, $gender, $color, $name, $square)
     {
         $this->breed = $breed;
         $this->age = $age;
@@ -31,12 +36,28 @@ abstract class Animal implements IAnimal
         $this->color = $color;
         $this->name = $name;
         $this->square = $square;
-        $this->max_satiety = $max_satiety;
     }
 
-    abstract public function voice(): void;
+    /**
+     * @return string
+     * get voice of pets
+     */
+    abstract public function voice(): string ;
 
+    /**
+     * @return bool
+     * get if pets are crawl
+     */
     abstract public function crawl(): bool;
+
+    /**
+     * get square of pet
+     * @return mixed
+     */
+    public function getPetSquare()
+    {
+        return $this->square;
+    }
 
     /**
      * Allocate feed to pets
@@ -45,25 +66,13 @@ abstract class Animal implements IAnimal
      */
     public function eat(Food $food)
     {
-            array_push($this->stomach, $food);
-
-//            /** @var Food $foodFromArr */
-//            $foodFromArr = array_filter($this->stomach, function ($foodEl) use ($food) {
-//                /** @var Food $foodEl */
-//                return $foodEl->amount_of_feed === $food->amount_of_feed;
-//            })[0] ?? null;
-
-//            if($foodFromArr !== null && $foodFromArr->amount_of_feed >= $this->max_satiety )
-//            {
-//                $this->isSatiety = 1;
-//            }
+        array_push($this->stomach, $food);
     }
 
     /**
-     * Toilet generate crao if pets
+     * Toilet generate crap
      * @return Generator
      */
-
     public function toilet(): Generator
     {
         while(!empty($this->stomach)) {
@@ -71,3 +80,4 @@ abstract class Animal implements IAnimal
         }
     }
 }
+
