@@ -1,32 +1,26 @@
 <?php
 
-
 namespace App;
-
 
 use App\Abstraction\Animal;
 
 class Room
 {
     public $petInRoom= []; // pets which are not in box
-    public $catInRoom = 0; //cats that are not in box
-    public $dogInRoom = 0; //dogs that are not in box
     public $all_craps = [];
     const LIMIT_OF_CRAP = 300; //limit of excrement, if excrement is more than, this it needed to be cleaned
 
-
+    /**
+     * add pets to room
+     * @param $pet
+     */
     public function addPets($pet)
     {
         array_push($this->petInRoom, $pet);
-        if ($pet instanceof Cat) {
-            $this->catInRoom++;
-        } else {
-            $this->dogInRoom++;
-        }
     }
 
     /**
-     * pets in box go to toilet and make a crap
+     * pets in room go to toilet and make a crap
      * @var Animal $pet
      * @return void
      */
@@ -42,23 +36,60 @@ class Room
     }
 
     /**
-     * @return bool
-     * check is box need clear
+     * get amount of dog(s) in room
+     * @return int
      */
-    public function isNeedClear():bool
+    public function getCatCount() :int
+    {
+        $catInRoom = 0;
+        foreach ($this->petInRoom as $petInRoom) {
+            if ($petInRoom instanceof Cat) {
+                $catInRoom++;
+            }
+        }
+        return $catInRoom;
+    }
+
+    /**
+     * get amount of cat(s) in room
+     * @return int
+     */
+    public function getDogCount() :int
+    {
+        $dogInRoom = 0;
+        foreach ($this->petInRoom as $petInRoom) {
+            if ($petInRoom instanceof Dog) {
+                $dogInRoom++;
+            }
+        }
+        return $dogInRoom;
+    }
+
+    /**
+     * @return int
+     * Do sum of all amount of craps in room
+     */
+    public function getCrapAmount() :int
     {
         $sumOfCraps = array_reduce($this->all_craps, function ($sum, $crap) {
             /** @var Crap $crap */
-            return $sum + $crap->amount_of_crap;
+            return $sum + $crap->getExcrement();
         }, 0);
+        return $sumOfCraps;
+    }
 
-        if ($sumOfCraps >= self::LIMIT_OF_CRAP) {
+    /**
+     * @return bool
+     * check is room need clear
+     */
+    public function isNeedClear():bool
+    {
+        if ($this->getCrapAmount() >= self::LIMIT_OF_CRAP) {
             return true;
         } else {
             return false;
         }
     }
-
 
     /**
      * clear all craps which are in Room
@@ -67,6 +98,4 @@ class Room
     {
         $this->all_craps = [];
     }
-
-
 }
