@@ -6,17 +6,13 @@ use App\Interfaces\IParameterParser;
 
 class ParameterParserCli implements IParameterParser
 {
-    /**
-     * @var int
-     */
+    /** @var int number of dog*/
     protected $amountOfDog = 0;
-    /**
-     * @var int
-     */
+
+    /** @var int number of cat */
     protected $amountOfCat = 0;
-    /**
-     * @var int
-     */
+
+    /** @var int square of box*/
     protected $squareOfBox = 0;
 
     /**

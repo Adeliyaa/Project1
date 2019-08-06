@@ -4,6 +4,7 @@ namespace App;
 
 class Crap
 {
+    /** @var int amount of pet's crap */
     private $amount_of_crap;
 
     /**

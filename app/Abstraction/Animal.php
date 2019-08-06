@@ -9,15 +9,26 @@ use Generator;
 
 abstract class Animal implements IAnimal
 {
-    protected $breed; //the breed of animal
-    protected $age; //age og animal
-    protected $gender; //gender of animal
-    protected $color; //color of animal
-    protected $name;//name of animal
-    protected $square; //square of animal
-    public static $current_feed = 0; //static due to current feed must change for all object to compare amount of feed which is constant
-    public $isPetInBox = 0; //determine is pet or animal in box
-    public $stomach = [];
+    /** @var string the breed of animal */
+    protected $breed;
+
+    /** @var int age of animal */
+    protected $age;
+
+    /** @var string gender of animal */
+    protected $gender;
+
+    /** @var string color of animal */
+    protected $color;
+
+    /** @var string name of animal */
+    protected $name;
+
+    /** @var int square of animal */
+    protected $square;
+
+    /** @var array stomach of each pet  */
+    protected $stomach = [];
 
     /**
      * Animal constructor.
@@ -39,14 +50,14 @@ abstract class Animal implements IAnimal
     }
 
     /**
-     * @return string
      * get voice of pets
+     * @return string
      */
     abstract public function voice(): string ;
 
     /**
-     * @return bool
      * get if pets are crawl
+     * @return bool
      */
     abstract public function crawl(): bool;
 
@@ -60,9 +71,17 @@ abstract class Animal implements IAnimal
     }
 
     /**
+     * get stomach of each pet
+     * @return array
+     */
+    public function getStomachArr():array
+    {
+        return $this->stomach;
+    }
+
+    /**
      * Allocate feed to pets
      * @var Food const $amount_of_feed
-     * @return
      */
     public function eat(Food $food)
     {

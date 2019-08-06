@@ -6,10 +6,15 @@ use App\Abstraction\Animal;
 
 class Room
 {
-    private $petInRoom= []; // pets which are not in box
+    /** @var array pet that are in room */
+    private $petInRoom= [];
+
+    /** @var array storage for craps */
     private $all_craps = [];
-    const LIMIT_OF_CRAP = 300; //limit of excrement, if excrement is more than, this it needed to be cleaned
-    
+
+    /** @var int limit of excrement */
+    private const LIMIT_OF_CRAP = 300;
+
     /**
      * get pets that are in Room
      * @return array
@@ -75,8 +80,8 @@ class Room
     }
 
     /**
+     * do sum of all amount of craps in room
      * @return int
-     * Do sum of all amount of craps in room
      */
     public function getCrapAmount() :int
     {
@@ -88,8 +93,8 @@ class Room
     }
 
     /**
-     * @return bool
      * check is room need clear
+     * @return bool
      */
     public function isNeedClear():bool
     {

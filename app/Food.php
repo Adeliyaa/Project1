@@ -4,6 +4,7 @@ namespace App;
 
 class Food
 {
+    /** @var int feed amount */
     private $amount_of_feed;
 
     /**

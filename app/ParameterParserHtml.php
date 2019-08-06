@@ -6,22 +6,13 @@ use App\Interfaces\IParameterParser;
 
 class ParameterParserHtml implements IParameterParser
 {
-    /**
-     * @var int
-     * number of dogs
-     */
+    /** @var int number of dogs */
     protected $amountOfDog = 0;
 
-    /**
-     * @var int
-     * number of cats
-     */
+    /** @var int number of cats */
     protected $amountOfCat = 0;
 
-    /**
-     * @var int
-     * square of box
-     */
+    /** @var int square of box */
     protected $squareOfBox = 0;
 
     /**
