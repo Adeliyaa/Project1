@@ -1,28 +1,37 @@
 <?php
+
 namespace App;
 
-
 use App\Abstraction\Animal;
-use App\Abstraction\ParameterParser;
 
 class Cat extends Animal
 {
-    const EXCREMENTS_MASS_PERCENTAGE = 0.15;
+    private const EXCREMENT_MASS_PERCENTAGE = 0.15;
 
-    public function voice(): void
+    /**
+     * get voice of cat
+     * @return string
+     */
+    public function voice(): string
     {
-        echo "Мяу Мяу!!!";
+        return "Мяу Мяу!!!";
     }
 
+    /**
+     * check is cat crawl or not
+     * @return bool
+     */
     public function crawl(): bool
     {
         return true;
     }
+
     /**
+     * get mass of cat's excrement
      * @return float
      */
     public function getExcrementMass(): float
     {
-        return self::EXCREMENTS_MASS_PERCENTAGE;
+        return self::EXCREMENT_MASS_PERCENTAGE;
     }
 }
