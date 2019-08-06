@@ -55,4 +55,13 @@ class BoxPresenter
             return "Box is not need clear!";
         }
     }
+
+    public function canAddExtraPet()
+    {
+        if ($this->box->canAddExtraPet()) {
+            return "Extra ".$this->box->canAddExtraPet()." pets can be added!";
+        } else {
+            return "No extra pet can be added!";
+        }
+    }
 }

@@ -64,6 +64,19 @@ class Box
 
     }
 
+    public function canAddExtraPet()
+    {
+        $extraPlace = self::$squareOfBox - $this::$current_space;
+        $extraPetNum = floor($extraPlace/150);
+
+        if ($extraPetNum > 1)
+        {
+            return $extraPetNum;
+        } else {
+            return 0;
+        }
+    }
+
     /**
      * get amount of dog(s) in box
      * @return int
