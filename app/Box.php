@@ -6,11 +6,20 @@ use App\Abstraction\Animal;
 
 class Box
 {
-    private static $current_space = 0; // free space in box
-    const LIMIT_OF_CRAP = 200; //limit of excrement in box
-    public $petInBox = []; // pets which are in box
-    public $all_craps= []; // save object of pet's crap in box
-    public static $squareOfBox;
+    /** @var int free space in box */
+    private static $current_space = 0;
+
+    /** @var int limit of excrement in box*/
+    private const LIMIT_OF_CRAP = 200;
+
+    /** @var array pets which are in box */
+    private $petInBox = [];
+
+    /** @var array storage of pet's crap in box */
+    private $all_craps= []; // save object of pet's crap in box
+
+    /** @var int square of box */
+    protected static $squareOfBox;
 
     /**
      * Box constructor.
@@ -21,6 +30,14 @@ class Box
         $this::$squareOfBox = $squareOfBox;
     }
 
+    /**
+     * get pets that are in box
+     * @return array
+     */
+    public function getPetInBoxArr() :array
+    {
+        return $this->petInBox;
+    }
 
     /**
      * Check is box has extra place for putting pets in it
@@ -28,8 +45,8 @@ class Box
      * @return bool
      */
     public function hasPlace($pet) {
-        if ($pet->getPetSquare() + $this::$current_space <= self::$squareOfBox) { //sum of squares of each pets must be
-            $this::$current_space = $pet->getPetSquare() + $this::$current_space;//change the current space of box
+        if ($pet->getPetSquare() + $this::$current_space <= self::$squareOfBox) {
+            $this::$current_space = $pet->getPetSquare() + $this::$current_space;
             return true;
         } else {
             return false;
@@ -42,11 +59,9 @@ class Box
      */
     public function addPets($pet)
     {
-        /**
-         * Array Sort by square(asc) to put as much as possible pets to box
-         */
+        /** Array Sort by square(asc) to put as much as possible pets to box */
             array_push($this->petInBox, $pet);
-            $pet->isPetInBox = 1;
+
     }
 
     /**

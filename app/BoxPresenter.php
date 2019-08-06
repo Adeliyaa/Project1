@@ -5,7 +5,7 @@ namespace App;
 class BoxPresenter
 {
     /** @var Box $box */
-    public $box ;
+    private $box ;
 
     /**
      * BoxPresenter constructor.
@@ -22,7 +22,7 @@ class BoxPresenter
      */
     public function getPetsInBox() :string
     {
-        return "Number of pets in box: ".count($this->box->petInBox);
+        return "Number of pets in box: ".count($this->box->getPetInBoxArr());
     }
 
     /**
