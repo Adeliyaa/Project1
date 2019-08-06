@@ -3,29 +3,33 @@
 namespace App;
 
 use App\Abstraction\Animal;
-use App\Abstraction\ParameterParser;
 
 class Box
 {
-    public $color; //color of box
-    //const SQUARE = 1200; //square of box is 1200
-    public static $current_space = 0; //initial space when we have add pets in box yet
-    const LIMIT_OF_CRAP = 200; //limit of excrement, if excrement is more than, this it needed to be cleaned
+    private static $current_space = 0; // free space in box
+    const LIMIT_OF_CRAP = 200; //limit of excrement in box
     public $petInBox = []; // pets which are in box
-    public $catInBox = 0; //counter for cats that are in box
-    public $dogInBox = 0; //counter for dogs that are in box
-    public $all_craps= []; //save object of craps of pets that are in box and have crap
-    public $sum_of_craps; //sum of excrement
+    public $all_craps= []; // save object of pet's crap in box
     public static $squareOfBox;
 
+    /**
+     * Box constructor.
+     * @param $squareOfBox
+     */
     public function __construct($squareOfBox)
     {
         $this::$squareOfBox = $squareOfBox;
     }
 
+
+    /**
+     * Check is box has extra place for putting pets in it
+     * @param Animal $pet
+     * @return bool
+     */
     public function hasPlace($pet) {
-        if ($pet->square + $this::$current_space <= self::$squareOfBox) { //sum of squares of each pets must be
-            $this::$current_space = $pet->square + $this::$current_space;//change the current space of box
+        if ($pet->getPetSquare() + $this::$current_space <= self::$squareOfBox) { //sum of squares of each pets must be
+            $this::$current_space = $pet->getPetSquare() + $this::$current_space;//change the current space of box
             return true;
         } else {
             return false;
@@ -33,6 +37,7 @@ class Box
     }
 
     /**
+     * Add pets to Box
      * @param Animal $pet
      */
     public function addPets($pet)
@@ -42,55 +47,72 @@ class Box
          */
             array_push($this->petInBox, $pet);
             $pet->isPetInBox = 1;
-
-            if ($pet instanceof Cat) {
-                $this->catInBox++;
-            } else {
-                $this->dogInBox++;
-            }
     }
 
     /**
-     * pets in box go to toilet and make a crap
+     * get amount of dog(s) in box
+     * @return int
+     */
+    public function getCatCount() :int
+    {
+        $catInBox = 0;
+        foreach ($this->petInBox as $petInBox) {
+            if ($petInBox instanceof Cat) {
+                $catInBox++;
+            }
+        }
+        return $catInBox;
+    }
+
+    /**
+     * get amount of cat(s) in dog
+     * @return int
+     */
+    public function getDogCount() :int
+    {
+        $dogInBox = 0;
+        foreach ($this->petInBox as $petInBox) {
+            if ($petInBox instanceof Dog) {
+                $dogInBox++;
+            }
+        }
+        return $dogInBox;
+    }
+
+    /**
+     * Pets in box go to toilet and make a crap
      * @return void
      */
     public function petsDoToilet() :void
     {
-
         /** @var Animal $pet */
         foreach ($this->petInBox as $pet) {
-            //$this->all_craps = array_merge($this->all_craps, $pet->toilet());
             foreach ($pet->toilet() as $crap) {
                 array_push($this->all_craps,$crap);
             }
         }
-        var_dump($this->all_craps);
     }
 
     /**
-     * @return bool
-     * check is box need clear
+     * Do sum of all amount of craps in box
+     * @return int
      */
-    public function isNeedClear():bool
+    public function getCrapAmount() :int
     {
         $sumOfCraps = array_reduce($this->all_craps, function ($sum, $crap) {
             /** @var Crap $crap */
-            return $sum + $crap->amount_of_crap;
+            return $sum + $crap->getExcrement();
         }, 0);
-//
-//        echo "<br/>"; ----- through array_map
-//        echo array_sum(array_map(function($crap) {
-//            return $crap->amount_of_crap;
-//        }, $this->all_craps));
-//
-//        echo "<br/>"; ----- primitive way
-//        $sum = 0;
-//        foreach ($this->all_craps as $crap) {
-//            $sum += $crap->amount_of_crap;
-//        }
-//        echo $sum;
+        return $sumOfCraps;
+    }
 
-        if ($sumOfCraps >= self::LIMIT_OF_CRAP) {
+    /**
+     * Check is box need clear
+     * @return bool
+     */
+    public function isNeedClear():bool
+    {
+        if ($this->getCrapAmount() >= self::LIMIT_OF_CRAP) {
             return true;
         } else {
             return false;
@@ -98,8 +120,8 @@ class Box
     }
 
     /**
+     * Clear all craps from box
      * @return void
-     * clear all craps from box
      */
     public function clearCrap(): void
     {
