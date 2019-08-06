@@ -1,36 +1,53 @@
 <?php
 
-
 namespace App;
-
-
-use App\Abstraction\Animal;
 
 class BoxPresenter
 {
     /** @var Box $box */
     public $box ;
-    public function __construct($box) {
+
+    /**
+     * BoxPresenter constructor.
+     * @param $box
+     */
+    public function __construct($box)
+    {
         $this->box = $box;
     }
-    public function getPetsInBox() {
-        $petsInBox= "Number of pets in box: ".count($this->box->petInBox);
-        return $petsInBox;
+
+    /**
+     * get number of pets in Box
+     * @return string
+     */
+    public function getPetsInBox() :string
+    {
+        return "Number of pets in box: ".count($this->box->petInBox);
     }
 
-    public function getCatsInBox() {
-        $catInBox= "Number of cats in box: ".$this->box->catInBox;
-        return $catInBox;
-
+    /**
+     * get number of cats in Box
+     * @return string
+     */
+    public function getCatsInBox() :string
+    {
+        return "Number of cats in box: ".$this->box->getCatCount();
     }
 
-    public function getDogsInBox() {
-        $dogInBox= "Number of dogs in box: ".$this->box->dogInBox;
-        return $dogInBox;
-
+    /**
+     * get number of dogs in Box
+     * @return string
+     */
+    public function getDogsInBox() :string
+    {
+        return "Number of dogs in box: ".$this->box->getDogCount();
     }
 
-    public function isNeedClear()
+    /**
+     * check is box need clear
+     * @return string
+     */
+    public function isNeedClear() :string
     {
         if ($this->box->isNeedClear()) {
             return "Box is need clear!";
@@ -38,6 +55,4 @@ class BoxPresenter
             return "Box is not need clear!";
         }
     }
-
-
 }
