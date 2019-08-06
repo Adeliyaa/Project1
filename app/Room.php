@@ -6,9 +6,18 @@ use App\Abstraction\Animal;
 
 class Room
 {
-    public $petInRoom= []; // pets which are not in box
-    public $all_craps = [];
+    private $petInRoom= []; // pets which are not in box
+    private $all_craps = [];
     const LIMIT_OF_CRAP = 300; //limit of excrement, if excrement is more than, this it needed to be cleaned
+    
+    /**
+     * get pets that are in Room
+     * @return array
+     */
+    public function getPetInRoomArr():array
+    {
+        return $this->petInRoom;
+    }
 
     /**
      * add pets to room

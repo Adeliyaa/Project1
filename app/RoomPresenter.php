@@ -5,7 +5,7 @@ namespace App;
 class RoomPresenter
 {
     /** @var Room $room */
-    public $room ;
+    private $room ;
 
     /**
      * RoomPresenter constructor.
@@ -21,7 +21,7 @@ class RoomPresenter
      */
     public function getPetInRoom() :string
     {
-        return "Number of pets in room: ".count($this->room->petInRoom);
+        return "Number of pets in room: ".count($this->room->getPetInRoomArr());
     }
 
     /**
