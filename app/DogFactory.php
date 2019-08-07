@@ -15,17 +15,17 @@ class DogFactory implements IFactory
     {
         $dogs = [];
 
-        $breed = ['Alaskan Klee Kai','Appenzeller Sennenhunde','Borzoi','Pitbul','Bolognese'];
-        $gender =['female', 'male'];
-        $color = ['red', 'black', 'white', 'silver','brown'];
-        $name = ['Ilya','Bekbolat','Serzhan','Adeliya','Sasha'];
+        $breed  = Config::get('dog_breed');
+        $gender = Config::get('gender');
+        $color  = Config::get('dog_color');
+        $name   = Config::get('dog_name');
 
-        $dogBreed = $breed[array_rand($breed,1)];
-        $dogAge = rand(1,7);
+        $dogBreed  = $breed[array_rand($breed,1)];
+        $dogAge    = Config::get('dog_age');
         $dogGender = $gender[array_rand($gender, 1)];
-        $dogColor = $color[array_rand($color,1)];
-        $dogName = $name[array_rand($name,1)];
-        $dogSquare = rand(100,300);
+        $dogColor  = $color[array_rand($color,1)];
+        $dogName   = $name[array_rand($name,1)];
+        $dogSquare = Config::get('dog_square');
 
         while ($dogAmount > 0) {
             array_push($dogs,new Dog($dogBreed,$dogAge,$dogGender,$dogColor,$dogName,$dogSquare));
