@@ -7,10 +7,10 @@ use App\Abstraction\Animal;
 class Box
 {
     /** @var int free space in box */
-    private static $current_space = 0;
+    private static $current_space;
 
     /** @var int limit of excrement in box*/
-    private const LIMIT_OF_CRAP = 200;
+    private static $box_limit_crap;
 
     /** @var array pets which are in box */
     private $petInBox = [];
@@ -27,7 +27,9 @@ class Box
      */
     public function __construct($squareOfBox)
     {
-        $this::$squareOfBox = $squareOfBox;
+        self::$squareOfBox    = $squareOfBox;
+        self::$box_limit_crap = Config::get('box_limit_crap');
+        self::$current_space  = Config::get('current_space');
     }
 
     /**
@@ -64,14 +66,26 @@ class Box
 
     }
 
-    public function canAddExtraPet()
+    /**
+     * calculate the number of potential pets that can be added to box
+     * @return float
+     */
+    public function numOfPotentialPets()
     {
         $extraPlace = self::$squareOfBox - $this::$current_space;
         $extraPetNum = floor($extraPlace/150);
+        return $extraPetNum;
+    }
 
-        if ($extraPetNum > 1)
+    /**
+     * Check is box can add extra pet
+     * @return float|int
+     */
+    public function canAddExtraPet()
+    {
+        if ($this->numOfPotentialPets() >= 1)
         {
-            return $extraPetNum;
+            return $this->numOfPotentialPets();
         } else {
             return 0;
         }
@@ -140,7 +154,7 @@ class Box
      */
     public function isNeedClear():bool
     {
-        if ($this->getCrapAmount() >= self::LIMIT_OF_CRAP) {
+        if ($this->getCrapAmount() >= self::$box_limit_crap) {
             return true;
         } else {
             return false;
@@ -156,3 +170,4 @@ class Box
         $this->all_craps = [];
     }
 }
+
