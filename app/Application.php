@@ -17,26 +17,28 @@ class Application
      */
     public function start(IView $view, IParameterParser $params)
     {
-        $dogs = DogFactory::create($params->getDogAmount());
+        $dogs   = DogFactory::create($params->getDogAmount());
 
-        $cats = CatFactory::create($params->getCatAmount());
+        $cats   = CatFactory::create($params->getCatAmount());
 
-        $box = BoxFactory::create($params->getBoxSquare());
-        $pets = array_merge($dogs, $cats);
+        $box    = BoxFactory::create($params->getBoxSquare());
+
+        $pets   = array_merge($dogs, $cats);
         shuffle($pets);
 
-        $room = new Room();
+        $room   = new Room();
 
         $insert = new Insert();
-        $feed = new AnimalFeeder;
+        $feed   = new AnimalFeeder;
 
         /** @var Animal $pets */
-        $feed->feedPets($pets);
+        $feed   ->feedPets($pets);
 
-        $insert->dispensePet($pets,$box,$room);
+        $insert ->dispensePet($pets,$box,$room);
 
-        $box->petsDoToilet();
-        $room->petsDoToilet();
+        $box    ->petsDoToilet();
+
+        $room   ->petsDoToilet();
 
         $view->view(new BoxPresenter($box),new RoomPresenter($room));
 
