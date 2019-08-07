@@ -13,7 +13,15 @@ class Room
     private $all_craps = [];
 
     /** @var int limit of excrement */
-    private const LIMIT_OF_CRAP = 300;
+    private static $room_limit_crap;
+
+    /**
+     * Room constructor.
+     */
+    public function __construct()
+    {
+        self::$room_limit_crap = Config::get('room_limit_crap');
+    }
 
     /**
      * get pets that are in Room
@@ -98,7 +106,7 @@ class Room
      */
     public function isNeedClear():bool
     {
-        if ($this->getCrapAmount() >= self::LIMIT_OF_CRAP) {
+        if ($this->getCrapAmount() >= self::$room_limit_crap) {
             return true;
         } else {
             return false;
