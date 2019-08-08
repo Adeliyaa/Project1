@@ -21,4 +21,3 @@ class Food
         return $this->amount_of_feed;
     }
 }
-

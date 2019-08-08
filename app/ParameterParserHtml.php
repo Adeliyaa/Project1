@@ -19,7 +19,7 @@ class ParameterParserHtml implements IParameterParser
     public $parameters = ['puppy_count','kitty_count','box_square'];
 
     /**
-     * ParameterParserHtml constructor.
+     * parameterParserHtml constructor.
      * get input data for html
      */
     public function __construct()
@@ -30,7 +30,7 @@ class ParameterParserHtml implements IParameterParser
     }
 
     /**
-     * Check existence of parameter
+     * check existence of parameter
      * @param $parameter
      * @return mixed
      */
@@ -70,4 +70,3 @@ class ParameterParserHtml implements IParameterParser
         return $this->box_square;
     }
 }
-

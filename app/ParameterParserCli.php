@@ -7,13 +7,16 @@ use App\Interfaces\IParameterParser;
 class ParameterParserCli implements IParameterParser
 {
     /** @var int number of dog*/
-    protected $amountOfDog = 0;
+    protected $puppy_count = 0;
 
     /** @var int number of cat */
-    protected $amountOfCat = 0;
+    protected $kitty_count = 0;
 
     /** @var int square of box*/
-    protected $squareOfBox = 0;
+    protected $box_square  = 0;
+
+    /** @var array store parameters */
+    public $params = ['puppy_count::','kitty_count::','box_square::'];
 
     /**
      * ParameterParserHtml constructor.
@@ -21,18 +24,25 @@ class ParameterParserCli implements IParameterParser
      */
     public function __construct()
     {
-        $longopts = array ("puppy_count::", "kitty_count::", "box_square::",);
-        $parameters = getopt("",$longopts);
-
-        $this->amountOfDog = $this->checkExistence($parameters['puppy_count']);
-        $this->amountOfCat = $this->checkExistence($parameters['kitty_count']);
-        $this->squareOfBox = $this->checkExistence($parameters['box_square']);
+        foreach ($this->params as $param) {
+            $param = str_replace(':', '', $param);
+            $this->$param = $this->checkExistence($param);
+        }
     }
 
-    public function checkExistence($parameter)
+    /**
+     * check existence of parameter
+     * @param $parameter
+     * @return mixed|null
+     */
+    public function checkExistence($param)
     {
-        if (isset($parameter)) {
-            return $parameter;
+        $parameters = getopt("",$this->params);
+
+        if (isset($parameters[$param])) {
+            return $parameters[$param];
+        } else {
+            return Config::get($param);
         }
     }
 
@@ -42,7 +52,7 @@ class ParameterParserCli implements IParameterParser
      */
     public function getDogAmount(): int
     {
-        return $this->amountOfDog;
+        return $this->puppy_count;
     }
 
     /**
@@ -51,7 +61,7 @@ class ParameterParserCli implements IParameterParser
      */
     public function getCatAmount(): int
     {
-        return $this->amountOfCat;
+        return $this->kitty_count;
     }
 
     /**
@@ -60,6 +70,6 @@ class ParameterParserCli implements IParameterParser
      */
     public function getBoxSquare(): int
     {
-        return $this->squareOfBox;
+        return $this->box_square;
     }
 }

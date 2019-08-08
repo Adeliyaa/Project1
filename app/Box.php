@@ -16,7 +16,7 @@ class Box
     private $petInBox = [];
 
     /** @var array storage of pet's crap in box */
-    private $all_craps= []; // save object of pet's crap in box
+    private $all_craps= [];
 
     /** @var int square of box */
     protected static $squareOfBox;
@@ -42,7 +42,7 @@ class Box
     }
 
     /**
-     * Check is box has extra place for putting pets in it
+     * check is box has extra place for putting pets in it
      * @param Animal $pet
      * @return bool
      */
@@ -56,14 +56,13 @@ class Box
     }
 
     /**
-     * Add pets to Box
+     * add pets to Box
      * @param Animal $pet
      */
     public function addPets($pet)
     {
         /** Array Sort by square(asc) to put as much as possible pets to box */
             array_push($this->petInBox, $pet);
-
     }
 
     /**
@@ -122,7 +121,7 @@ class Box
     }
 
     /**
-     * Pets in box go to toilet and make a crap
+     * pets in box go to toilet and make a crap
      * @return void
      */
     public function petsDoToilet() :void
@@ -136,7 +135,7 @@ class Box
     }
 
     /**
-     * Do sum of all amount of craps in box
+     * do sum of all amount of craps in box
      * @return int
      */
     public function getCrapAmount() :int
@@ -170,4 +169,3 @@ class Box
         $this->all_craps = [];
     }
 }
-

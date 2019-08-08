@@ -49,7 +49,6 @@ class Room
     public function petsDoToilet() :void
     {
         foreach ($this->petInRoom as $pet) {
-            //$this->all_craps = array_merge($this->all_craps, $pet->toilet());
             $craps = $pet->toilet();
             foreach ($craps as $crap) {
                 array_push($this->all_craps, $crap);

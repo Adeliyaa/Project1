@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Exception;
+
 class Config
 {
     /**
@@ -31,9 +33,16 @@ class Config
             'box_square'      => 1200,
         ];
 
-        $value = isset($config[$key]) ? $config[$key] : null;
-
-        return $value;
+        try {
+            if(isset($config[$key])) {
+                $value = $config[$key];
+                return $value;
+            } else {
+                throw new Exception("Key is not exist!");
+            }
+        }
+         catch(Exception $e) {
+            echo "\n Exception Caught", $e->getMessage();
+        }
     }
 }
-

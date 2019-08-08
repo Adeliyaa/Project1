@@ -31,4 +31,3 @@ interface IAnimal
      */
     public function toilet(): \Generator;
 }
-

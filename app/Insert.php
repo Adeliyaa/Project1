@@ -17,7 +17,7 @@ class Insert
         $squares = [];
         /** @var Animal $pet */
         foreach ($pets as $pet) {
-            $squares[] = $pet->getPetSquare(); //any object field
+            $squares[] = $pet->getPetSquare();
         }
         array_multisort($squares, SORT_ASC, $pets);
 

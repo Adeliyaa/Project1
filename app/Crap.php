@@ -25,4 +25,3 @@ class Crap
         return $this->amount_of_crap;
     }
 }
-

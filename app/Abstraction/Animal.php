@@ -80,7 +80,7 @@ abstract class Animal implements IAnimal
     }
 
     /**
-     * Allocate feed to pets
+     * allocate feed to pets
      * @var Food const $amount_of_feed
      */
     public function eat(Food $food)
@@ -89,7 +89,7 @@ abstract class Animal implements IAnimal
     }
 
     /**
-     * Toilet generate crap
+     * toilet generate crap
      * @return Generator
      */
     public function toilet(): Generator
@@ -99,4 +99,3 @@ abstract class Animal implements IAnimal
         }
     }
 }
-
