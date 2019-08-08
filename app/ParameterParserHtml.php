@@ -7,13 +7,16 @@ use App\Interfaces\IParameterParser;
 class ParameterParserHtml implements IParameterParser
 {
     /** @var int number of dogs */
-    protected $amountOfDog = 0;
+    protected $puppy_count;
 
     /** @var int number of cats */
-    protected $amountOfCat = 0;
+    protected $kitty_count;
 
     /** @var int square of box */
-    protected $squareOfBox = 0;
+    protected $box_square;
+
+    /** @var array store parameters */
+    public $parameters = ['puppy_count','kitty_count','box_square'];
 
     /**
      * ParameterParserHtml constructor.
@@ -21,9 +24,9 @@ class ParameterParserHtml implements IParameterParser
      */
     public function __construct()
     {
-        $this->amountOfDog = $this->checkExistence($_GET['puppy_count']);
-        $this->amountOfCat = $this->checkExistence($_GET['kitty_count']);
-        $this->squareOfBox = $this->checkExistence($_GET['box_square']);
+        foreach ($this->parameters as $parameter) {
+            $this->$parameter = $this->checkExistence($parameter);
+        }
     }
 
     /**
@@ -33,8 +36,10 @@ class ParameterParserHtml implements IParameterParser
      */
     public function checkExistence($parameter)
     {
-        if (isset($parameter)) {
-            return $parameter;
+        if (isset($_GET[$parameter])) {
+            return $_GET[$parameter];
+        } else {
+            return Config::get($parameter);
         }
     }
 
@@ -44,7 +49,7 @@ class ParameterParserHtml implements IParameterParser
      */
     public function getDogAmount(): int
     {
-        return $this->amountOfDog;
+        return $this->puppy_count;
     }
 
     /**
@@ -53,7 +58,7 @@ class ParameterParserHtml implements IParameterParser
      */
     public function getCatAmount(): int
     {
-        return $this->amountOfCat;
+        return $this->kitty_count;
     }
 
     /**
@@ -62,6 +67,7 @@ class ParameterParserHtml implements IParameterParser
      */
     public function getBoxSquare(): int
     {
-        return $this->squareOfBox;
+        return $this->box_square;
     }
 }
+
