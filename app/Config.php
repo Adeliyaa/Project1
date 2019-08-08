@@ -36,6 +36,7 @@ class Config
         try {
             if(isset($config[$key])) {
                 $value = $config[$key];
+
                 return $value;
             } else {
                 throw new Exception("Key is not exist!");

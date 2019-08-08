@@ -6,6 +6,7 @@ use App\Abstraction\Animal;
 
 class Cat extends Animal
 {
+    /** @var float percentage of excrement from food */
     private const EXCREMENT_MASS_PERCENTAGE = 0.15;
 
     /**

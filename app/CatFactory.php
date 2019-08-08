@@ -29,6 +29,7 @@ class CatFactory implements IFactory
 
         while ($catAmount > 0) {
             array_push($cats,new Cat($catBreed,$catAge,$catGender,$catColor,$catName,$catSquare));
+
             $catAmount--;
         }
         return $cats;

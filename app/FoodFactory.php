@@ -15,6 +15,7 @@ class FoodFactory
 
         while($portion_amount > 0) {
             array_push($foodPortion, new Food(200));
+
             $portion_amount--;
         }
         return $foodPortion;

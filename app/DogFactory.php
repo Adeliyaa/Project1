@@ -29,6 +29,7 @@ class DogFactory implements IFactory
 
         while ($dogAmount > 0) {
             array_push($dogs,new Dog($dogBreed,$dogAge,$dogGender,$dogColor,$dogName,$dogSquare));
+
             $dogAmount--;
         }
         return $dogs;

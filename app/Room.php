@@ -50,6 +50,7 @@ class Room
     {
         foreach ($this->petInRoom as $pet) {
             $craps = $pet->toilet();
+
             foreach ($craps as $crap) {
                 array_push($this->all_craps, $crap);
             }
@@ -63,6 +64,7 @@ class Room
     public function getCatCount() :int
     {
         $catInRoom = 0;
+
         foreach ($this->petInRoom as $petInRoom) {
             if ($petInRoom instanceof Cat) {
                 $catInRoom++;
@@ -78,6 +80,7 @@ class Room
     public function getDogCount() :int
     {
         $dogInRoom = 0;
+
         foreach ($this->petInRoom as $petInRoom) {
             if ($petInRoom instanceof Dog) {
                 $dogInRoom++;
@@ -96,6 +99,7 @@ class Room
             /** @var Crap $crap */
             return $sum + $crap->getExcrement();
         }, 0);
+
         return $sumOfCraps;
     }
 
