@@ -29,10 +29,10 @@ class Application
         $feed   = new AnimalFeeder;
 
         /** @var Animal $pets */
-        $feed   ->feedPets($pets);
-        $insert ->dispensePet($pets,$box,$room);
-        $box    ->petsDoToilet();
-        $room   ->petsDoToilet();
+        $feed->feedPets($pets);
+        $insert->dispensePet($pets,$box,$room);
+        $box->petsDoToilet();
+        $room->petsDoToilet();
         $view->view(new BoxPresenter($box),new RoomPresenter($room));
 
         if ($box->isNeedClear()) {

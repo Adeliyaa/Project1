@@ -25,7 +25,7 @@ class ParameterParserCli implements IParameterParser
     public function __construct()
     {
         foreach ($this->params as $param) {
-            $param = str_replace(':', '', $param);
+            $param        = str_replace(':', '', $param);
             $this->$param = $this->checkExistence($param);
         }
     }
