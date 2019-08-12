@@ -13,6 +13,7 @@ class CatFactory implements IFactory
      */
     static public function create(int $catAmount)
     {
+        /** @var array $cats */
         $cats = [];
 
         $breed  = Config::get('cat_breed');

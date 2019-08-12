@@ -13,6 +13,7 @@ class DogFactory implements IFactory
      */
     static public function create(int $dogAmount)
     {
+        /** @var array $dogs */
         $dogs = [];
 
         $breed  = Config::get('dog_breed');

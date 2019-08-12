@@ -46,7 +46,8 @@ class Box
      * @param Animal $pet
      * @return bool
      */
-    public function hasPlace($pet) {
+    public function hasPlace($pet)
+    {
         if ($pet->getPetSquare() + $this::$current_space <= self::$squareOfBox) {
             $this::$current_space = $pet->getPetSquare() + $this::$current_space;
             return true;

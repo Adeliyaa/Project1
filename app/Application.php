@@ -23,6 +23,7 @@ class Application
         $pets   = array_merge($dogs, $cats);
 
         shuffle($pets);
+
         $room   = new Room();
         $insert = new Insert();
         $feed   = new AnimalFeeder;

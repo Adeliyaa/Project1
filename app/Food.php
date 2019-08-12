@@ -16,6 +16,10 @@ class Food
         $this->amount_of_feed = $amount_of_feed;
     }
 
+    /**
+     * function for getting the amount of food
+     * @return int
+     */
     public function getFoodAmount()
     {
         return $this->amount_of_feed;

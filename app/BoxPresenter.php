@@ -56,6 +56,10 @@ class BoxPresenter
         }
     }
 
+    /**
+     * check is box can add extra pet
+     * @return string
+     */
     public function canAddExtraPet()
     {
         if ($this->box->canAddExtraPet()) {
