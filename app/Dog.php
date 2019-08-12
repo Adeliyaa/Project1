@@ -1,25 +1,38 @@
 <?php
-namespace App;
 
+namespace App;
 
 use App\Abstraction\Animal;
 
 class Dog extends Animal
 {
-    const EXCREMENTS_MASS_PERCENTAGE = 0.3;
+    /** @var float percentage of excrement from food */
+    private const EXCREMENT_MASS_PERCENTAGE = 0.3;
 
-    public function voice(): void
+    /**
+     * get voice of dog
+     * @return string
+     */
+    public function voice(): string
     {
-        echo "Гаф Гаф!!!";
+        return "Гаф Гаф!!!";
     }
 
+    /**
+     * check is dog crawl or not
+     * @return bool
+     */
     public function crawl(): bool
     {
         return true;
     }
 
-    public function getExcrementsMass(): float
+    /**
+     * get dog's mass excrement
+     * @return float
+     */
+    public function getExcrementMass(): float
     {
-        return self::EXCREMENTS_MASS_PERCENTAGE;
+        return self::EXCREMENT_MASS_PERCENTAGE;
     }
 }

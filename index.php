@@ -1,12 +1,14 @@
 <?php
+
+use App\ParameterParserHtml;
+
 require 'vendor/autoload.php';
 
-$html=new \App\HtmlView(); //instance of Html View
-$start = new \App\Application(); //instance of Application
-$quantityHtml = new \App\QuantityHtml();
-$start->start($html,$quantityHtml);
+define('ROOT', __DIR__ . '/');
 
+$htmlView = new \App\HtmlView();
+$start    = new \App\Application();
+$params   = new ParameterParserHtml();
 
-
-
+$start->start($htmlView,$params);
 

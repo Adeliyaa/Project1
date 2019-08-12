@@ -1,10 +1,33 @@
 <?php
+
 namespace App\Interfaces;
+
+use App\Food;
 
 interface IAnimal
 {
-    public function voice() :void;
+    /**
+     * @return string
+     * get voice of pets
+     */
+    public function voice() :string;
+
+    /**
+     * @return bool
+     * get if pets are crawl
+     */
     public function crawl() :bool;
-    public function eat($amount_of_feed);
-    public function toilet();
+
+    /**
+     * @param Food $food
+     * @return mixed
+     * feed pets with food
+     */
+    public function eat(Food $food);
+
+    /**
+     * @return \Generator
+     * pets go toilet
+     */
+    public function toilet(): \Generator;
 }

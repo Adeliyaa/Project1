@@ -1,82 +1,101 @@
 <?php
+
 namespace App\Abstraction;
 
-
 use App\Crap;
+use App\Food;
 use App\Interfaces\IAnimal;
+use Generator;
 
 abstract class Animal implements IAnimal
 {
-    protected $breed; //the breed of animal
-    protected $age; //age og animal
-    protected $gender; //gender of animal
-    protected $color; //color of animal
-    public $name;//name of animal
-    public $square; //square of animal
-    public $satiety; //current satiety
-    public $max_satiety;//when animal get food, it reaches max satiety
-    public $isPetInBox = 0; //determine is pet or animal in box
-    public $needFood; //is difference between max satiety and satiety
-    public static $current_feed = 0; //static due to current feed must change for all object to compare amount of feed which is constant
-    public $isSatiety = 0; //condition of satiety
-    public $id_of_animal; // necessary for deleting animal and id is unique
-    public static $petBoxHungry = 0; //counter for pets which are in box and hungry
-    public static $petBoxNotHungry = 0; //counter for pets which are in box and not hungry
-    public static $petNotBoxHungry = 0; //counter for pets which are not in box and hungry
-    public static $petNotBoxNotHungry = 0;//counter for pets which are not in box and not hungry
+    /** @var string the breed of animal */
+    protected $breed;
 
-    public function __construct($id_of_animal, $breed, $age, $gender, $color, $name, $square, $satiety, $max_satiety)
+    /** @var int age of animal */
+    protected $age;
+
+    /** @var string gender of animal */
+    protected $gender;
+
+    /** @var string color of animal */
+    protected $color;
+
+    /** @var string name of animal */
+    protected $name;
+
+    /** @var int square of animal */
+    protected $square;
+
+    /** @var array stomach of each pet  */
+    protected $stomach = [];
+
+    /**
+     * Animal constructor.
+     * @param $breed
+     * @param $age
+     * @param $gender
+     * @param $color
+     * @param $name
+     * @param $square
+     */
+    public function __construct($breed, $age, $gender, $color, $name, $square)
     {
-        $this->id_of_animal = $id_of_animal;
-        $this->breed = $breed;
-        $this->age = $age;
+        $this->breed  = $breed;
+        $this->age    = $age;
         $this->gender = $gender;
-        $this->color = $color;
-        $this->name = $name;
+        $this->color  = $color;
+        $this->name   = $name;
         $this->square = $square;
-        $this->satiety = $satiety;
-        $this->max_satiety = $max_satiety;
     }
 
-    abstract public function voice(): void;
+    /**
+     * get voice of pets
+     * @return string
+     */
+    abstract public function voice(): string ;
 
+    /**
+     * get if pets are crawl
+     * @return bool
+     */
     abstract public function crawl(): bool;
 
-    abstract public function getExcrementsMass(): float;
-
     /**
-     * allocate feed (which is constant) to pets
-    */
-
-    public function eat($amount_of_feed)
+     * get square of pet
+     * @return mixed
+     */
+    public function getPetSquare()
     {
-            if ($this->needFood + self::$current_feed <= $amount_of_feed) { //sum of squares of each pets must be less or equal to SQUARE of box
-                $this->isSatiety = 1;
-                if ($this->isPetInBox == 0)
-                {
-                    $this::$petBoxNotHungry++;
-                } else {
-                    $this::$petBoxNotHungry++;
-                }
-                self::$current_feed = $this->needFood + self::$current_feed; //change the current feed of box when we add each pet
-            } else {
-                if ($this->isPetInBox == 0)
-                {
-                    $this::$petNotBoxHungry++;
-                } else {
-                    $this::$petBoxHungry++;
-                }
-            }
-            //self::$current_feed = $this->needFood + self::$current_feed; //change the current feed of box when we add each pet
+        return $this->square;
     }
 
     /**
-     * Toilet checks is pet in satiety
-     * if yes , then it will make excrement(crap)
-    */
-
-    public function toilet()
+     * get stomach of each pet
+     * @return array
+     */
+    public function getStomachArr():array
     {
-        return $this->isSatiety == 1 ? new Crap($this->max_satiety * $this->getExcrementsMass()) : null;
+        return $this->stomach;
+    }
+
+    /**
+     * allocate feed to pets
+     * @var Food const $amount_of_feed
+     */
+    public function eat(Food $food)
+    {
+        array_push($this->stomach, $food);
+    }
+
+    /**
+     * toilet generate crap
+     * @return Generator
+     */
+    public function toilet(): Generator
+    {
+        while(!empty($this->stomach)) {
+            yield new Crap(array_pop($this->stomach));
+        }
     }
 }
