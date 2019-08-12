@@ -94,7 +94,7 @@ abstract class Animal implements IAnimal
      */
     public function toilet(): Generator
     {
-        while(!empty($this->stomach)) {
+        while (!empty($this->stomach)) {
             yield new Crap(array_pop($this->stomach));
         }
     }

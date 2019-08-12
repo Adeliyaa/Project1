@@ -72,8 +72,9 @@ class Box
      */
     public function numOfPotentialPets()
     {
-        $extraPlace = self::$squareOfBox - $this::$current_space;
+        $extraPlace  = self::$squareOfBox - $this::$current_space;
         $extraPetNum = floor($extraPlace/150);
+
         return $extraPetNum;
     }
 
@@ -83,8 +84,7 @@ class Box
      */
     public function canAddExtraPet()
     {
-        if ($this->numOfPotentialPets() >= 1)
-        {
+        if ($this->numOfPotentialPets() >= 1) {
             return $this->numOfPotentialPets();
         } else {
             return 0;
@@ -98,6 +98,7 @@ class Box
     public function getCatCount() :int
     {
         $catInBox = 0;
+
         foreach ($this->petInBox as $petInBox) {
             if ($petInBox instanceof Cat) {
                 $catInBox++;
@@ -113,6 +114,7 @@ class Box
     public function getDogCount() :int
     {
         $dogInBox = 0;
+
         foreach ($this->petInBox as $petInBox) {
             if ($petInBox instanceof Dog) {
                 $dogInBox++;
